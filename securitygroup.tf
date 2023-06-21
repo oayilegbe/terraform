@@ -1,8 +1,8 @@
 # create security group for the ec2 instance
-    resource "aws_security_group" "ec2_security_group" {
-    name        = "ec2 security group"
+    resource "aws_security_group" "web_serverSG" {
+    name        = "myInstance"
     description = "allow access on ports 8080 and 22"
-    vpc_id      = var.vpc_id
+    vpc_id      = aws_vpc.terraformVPC.id
 
 # allow access on port 80
   ingress {
@@ -39,6 +39,6 @@
   }
 
   tags   = {
-    Name = "jenkins server security group"
+    Name = "allow_http"
   }
 }

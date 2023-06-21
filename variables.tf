@@ -4,15 +4,15 @@
 
 #Your values will be different but here is what it should look like.
 
-variable "subnet_id" {
-    description = "The VPC subnet the instance(s) will be created in"
-    default = "subnet-0d4d278845246bb3b" #look in AWS console for your default subnet
-}
+# variable "subnet_id" {
+#     description = "The VPC subnet the instance(s) will be created in"
+#     default = "subnet-0d4d278845246bb3b" #look in AWS console for your default subnet
+# }
 
-variable "vpc_id" {
-    type = string
-    default = "vpc-01814c64052aee6d4" #look in AWS console for your default VPC
-}
+# variable "vpc_id" {
+#     type = string
+#     default = "vpc-01814c64052aee6d4" #look in AWS console for your default VPC
+# }
 
 variable "instance_type" {
     type = string
