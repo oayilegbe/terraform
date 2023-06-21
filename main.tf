@@ -2,7 +2,7 @@
 #We then need to create a private S3 bucket for any Jenkins artifacts.
 
 #launch the ec2 instance and install website
-resource "aws_instance" "ec2_instance" {
+resource "aws_instance" "myInstance" {
   ami                    = data.aws_ami.amzn2.id   #"ami-026ebd4cfe2c043b2" 
   instance_type          = var.instance_type
   subnet_id              = var.subnet_id
@@ -16,15 +16,10 @@ resource "aws_instance" "ec2_instance" {
  
   user_data = <<-EOF
     #!/bin/bash
-    sudo yum update -y #Ensure that your software packages are up to date on your instance by using the following command to perform a quick software update
-    sudo wget -O /etc/yum.repos.d/jenkins.repo \https://pkg.jenkins.io/redhat-stable/jenkins.repo #Add the Jenkins repo using the following command
-    sudo rpm --import https://pkg.jenkins.io/redhat-stable/jenkins.io-2023.key #Import a key file from Jenkins-CI to enable installation from the package
-    sudo yum upgrade -y
-    sudo yum install java-1.8.0-amazon-corretto-devel -y
-    sudo yum install jenkins -y #Install Jenkins:
-    sudo systemctl enable jenkins #Enable the Jenkins service to start at boot
-    sudo systemctl start jenkins #Start Jenkins as a service:
-    sudo systemctl status jenkins
+    yum -y install httpd
+    echo "<h1>Hello, World</h1>" > /var/www/html/inndex.html
+    sudo systemctl enable httpd
+    sudo systemctl start httpd
     EOF
 
   tags = {
@@ -43,6 +38,6 @@ resource "aws_s3_bucket" "bucketterraform" {
 }
 
 output "DNS" {
-  value = aws_instance.ec2_instance.public_dns
+  value = aws_instance.myInstance.public_dns
 }
 
