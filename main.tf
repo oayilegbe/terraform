@@ -29,7 +29,7 @@ resource "aws_route_table" "terraformRT" {
    } 
 }
 
-#Create Route Table
+#Create Route
 resource "aws_route" "terraformROUTE" {
   route_table_id = aws_route_table.terraformRT.id
   destination_cidr_block = "0.0.0.0/0"
@@ -163,10 +163,5 @@ resource "aws_autoscaling_group" "terraformASG" {
 resource "aws_autoscaling_attachment" "asg_attach" {
   autoscaling_group_name = aws_autoscaling_group.terraformASG.id
   alb_target_group_arn = aws_lb_target_group.terraformTG.arn
-}
-
-
-output "ALB_DNS" {
-  value = aws_lb.terraformALB.dns_name
 }
 
